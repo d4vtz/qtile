@@ -6,6 +6,10 @@ from libqtile.layout.max import Max
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
+from settings.hooks import autostart
+
+autostart()
+
 mod = "mod4"
 terminal = guess_terminal()
 
@@ -42,7 +46,7 @@ keys = [
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
-    Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
+    Key([mod, "control"], "r", lazy.restart(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
 ]
