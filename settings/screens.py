@@ -1,30 +1,15 @@
-from libqtile import bar, widget
+from libqtile import bar
 from libqtile.config import Screen
+
+from .widgets import set_widgets
 
 
 def set_screens():
-    widgets = [
-        widget.CurrentLayout(),
-        widget.GroupBox(),
-        widget.Prompt(),
-        widget.WindowName(),
-        widget.Chord(
-            chords_colors={
-                "launch": ("#ff0000", "#ffffff"),
-            },
-            name_transform=lambda name: name.upper(),
-        ),
-        widget.TextBox("default config", name="default"),
-        widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
-        widget.Systray(),
-        widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
-        widget.QuickExit(),
-    ]
 
     return [
         Screen(
             top=bar.Bar(
-                widgets=widgets,
+                widgets=set_widgets(),
                 size=22,
                 margin=[6, 6, 6, 6],  # [N. E. S, W]
                 opacity=0.8,
