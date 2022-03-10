@@ -1,11 +1,12 @@
 from libqtile import bar, widget
-from libqtile.config import Click, Drag, Group, Key, Match, Screen
+from libqtile.config import Click, Drag, Key, Match, Screen
 from libqtile.layout.columns import Columns
 from libqtile.layout.floating import Floating
 from libqtile.layout.max import Max
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
+from settings.groups import set_groups
 from settings.hooks import autostart
 from settings.keys import set_keys
 
@@ -16,25 +17,8 @@ terminal = guess_terminal()
 
 keys = set_keys()
 
-groups = [Group(i) for i in "123456789"]
+groups = set_groups()
 
-for i in groups:
-    keys.extend(
-        [
-            Key(
-                [mod],
-                i.name,
-                lazy.group[i.name].toscreen(),
-                desc="Switch to group {}".format(i.name),
-            ),
-            Key(
-                [mod, "shift"],
-                i.name,
-                lazy.window.togroup(i.name, switch_group=True),
-                desc="Switch to & move focused window to group {}".format(i.name),
-            ),
-        ]
-    )
 
 layouts = [
     Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
