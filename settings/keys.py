@@ -1,5 +1,6 @@
 from libqtile.config import Key
 from libqtile.lazy import lazy
+from libqtile.utils import guess_terminal
 
 from .functions import (focus_next_group, focus_previous_group, resize_down,
                         resize_left, resize_right, resize_up)
@@ -201,7 +202,7 @@ def set_keys():
             Key(
                 modifiers.super,
                 "Return",
-                lazy.spawn("kitty"),
+                lazy.spawn(guess_terminal()),
                 desc="Lanzar terminal",
             ),
             Key(

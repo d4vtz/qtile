@@ -4,7 +4,6 @@ from libqtile.layout.columns import Columns
 from libqtile.layout.floating import Floating
 from libqtile.layout.max import Max
 from libqtile.lazy import lazy
-from libqtile.utils import guess_terminal
 
 from settings.groups import set_groups
 from settings.hooks import autostart
@@ -12,12 +11,8 @@ from settings.keys import set_keys
 
 autostart()
 
-mod = "mod4"
-terminal = guess_terminal()
-
 keys = set_keys()
 groups = set_groups()
-
 
 layouts = [
     Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
