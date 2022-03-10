@@ -1,18 +1,18 @@
-from libqtile import bar, widget
-from libqtile.config import Click, Drag, Match, Screen
+from libqtile.config import Match
 from libqtile.layout.columns import Columns
 from libqtile.layout.floating import Floating
 from libqtile.layout.max import Max
-from libqtile.lazy import lazy
 
 from settings.groups import set_groups
 from settings.hooks import autostart
 from settings.keys import set_keys
+from settings.screens import set_screens
 
 autostart()
 
 keys = set_keys()
 groups = set_groups()
+screens = set_screens()
 
 layouts = [
     Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
@@ -26,46 +26,6 @@ widget_defaults = dict(
 )
 extension_defaults = widget_defaults.copy()
 
-screens = [
-    Screen(
-        bottom=bar.Bar(
-            [
-                widget.CurrentLayout(),
-                widget.GroupBox(),
-                widget.Prompt(),
-                widget.WindowName(),
-                widget.Chord(
-                    chords_colors={
-                        "launch": ("#ff0000", "#ffffff"),
-                    },
-                    name_transform=lambda name: name.upper(),
-                ),
-                widget.TextBox("default config", name="default"),
-                widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
-                widget.Systray(),
-                widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
-                widget.QuickExit(),
-            ],
-            24,
-            # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
-            # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
-        ),
-    ),
-]
-
-# Drag floating layouts.
-mouse = [
-    Drag(
-        [mod],
-        "Button1",
-        lazy.window.set_position_floating(),
-        start=lazy.window.get_position(),
-    ),
-    Drag(
-        [mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()
-    ),
-    Click([mod], "Button2", lazy.window.bring_to_front()),
-]
 
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: list
