@@ -1,5 +1,5 @@
 from libqtile import bar, widget
-from libqtile.config import Click, Drag, Key, Match, Screen
+from libqtile.config import Click, Drag, Match, Screen
 from libqtile.layout.columns import Columns
 from libqtile.layout.floating import Floating
 from libqtile.layout.max import Max
@@ -16,7 +16,6 @@ mod = "mod4"
 terminal = guess_terminal()
 
 keys = set_keys()
-
 groups = set_groups()
 
 

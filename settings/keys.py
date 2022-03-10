@@ -1,7 +1,9 @@
 from libqtile.config import Key
 from libqtile.lazy import lazy
 
-from .functions import resize_down, resize_left, resize_right, resize_up
+from .functions import (focus_next_group, focus_previous_group, resize_down,
+                        resize_left, resize_right, resize_up)
+from .groups import set_groups
 
 
 class Directions:
@@ -25,7 +27,7 @@ class Modifiers:
     shift = "shift"
 
     super = [mod]
-    mod_ctrl = [ctrl]
+    control = [ctrl]
     super_shift = [mod, shift]
     super_ctrl = [mod, ctrl]
     super_alt = [mod, alt]
@@ -159,6 +161,36 @@ def set_keys():
                 "Return",
                 lazy.layout.toggle_split(),
                 desc="Rotar ventanas",
+            ),
+        ]
+    )
+
+    for index, group in enumerate(set_groups(), start=1):
+        keys.append(
+            Key(
+                modifiers.super,
+                str(index),
+                lazy.group[group.name].toscreen(),
+            )
+        ),
+        keys.append(
+            Key(
+                modifiers.super_shift,
+                str(index),
+                lazy.window.togroup(group.name),
+            )
+        )
+    keys.extend(
+        [
+            Key(
+                modifiers.control,
+                directions.left,
+                lazy.function(focus_previous_group),
+            ),
+            Key(
+                modifiers.control,
+                directions.right,
+                lazy.function(focus_next_group),
             ),
         ]
     )

@@ -1,6 +1,24 @@
 from libqtile.lazy import lazy
 
 
+def focus_previous_group(qtile):
+    group = qtile.current_screen.group
+    group_index = qtile.groups.index(group)
+    previous_group = group.get_previous_group(skip_empty=True)
+    previous_group_index = qtile.groups.index(previous_group)
+    if previous_group_index < group_index:
+        qtile.current_screen.set_group(previous_group)
+
+
+def focus_next_group(qtile):
+    group = qtile.current_screen.group
+    group_index = qtile.groups.index(group)
+    next_group = group.get_next_group(skip_empty=True)
+    next_group_index = qtile.groups.index(next_group)
+    if next_group_index > group_index:
+        qtile.current_screen.set_group(next_group)
+
+
 def resize(qtile, direction):
     layout = qtile.current_layout
     child = layout.current
